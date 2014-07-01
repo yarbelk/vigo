@@ -11,14 +11,20 @@ type WindowMode struct {
 	count  int
 }
 
-func NewWindowMode(editor *editor.Editor, count int) WindowMode {
-	return WindowMode{editor: editor, count: count}
+func NewWindowMode(editor *editor.Editor, count int) *WindowMode {
+	return &WindowMode{editor: editor, count: count}
 }
 
-func (m WindowMode) Enter(e *editor.Editor) {
+func (m *WindowMode) Reset() {
 }
 
-func (m WindowMode) OnKey(ev *termbox.Event) {
+func (m *WindowMode) Exit() {
+}
+
+func (m *WindowMode) Enter(e *editor.Editor) {
+}
+
+func (m *WindowMode) OnKey(ev *termbox.Event) {
 	switch ev.Ch {
 	case 'h':
 		m.editor.Commands <- cmd.NearestVSplit{cmd.Backward}
@@ -32,7 +38,4 @@ func (m WindowMode) OnKey(ev *termbox.Event) {
 		// TODO viewTree.normalizeSplit
 	}
 	m.editor.SetMode(NewNormalMode(m.editor))
-}
-
-func (m WindowMode) Exit() {
 }

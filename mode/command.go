@@ -17,12 +17,16 @@ type CommandMode struct {
 	buffer *bytes.Buffer
 }
 
-func NewCommandMode(editor *editor.Editor, mode editor.Mode) CommandMode {
+func NewCommandMode(editor *editor.Editor, mode editor.Mode) *CommandMode {
 	m := CommandMode{editor: editor, mode: mode, buffer: &bytes.Buffer{}}
-	return m
+	return &m
 }
 
-func (m CommandMode) Enter(e *editor.Editor) {
+func (m *CommandMode) Reset() {
+	m.editor.SetMode(m.mode)
+}
+
+func (m *CommandMode) Enter(e *editor.Editor) {
 }
 
 func (m CommandMode) NeedsCursor() bool {
@@ -34,10 +38,10 @@ func (m CommandMode) CursorPosition() (int, int) {
 	return m.buffer.Len() + 1, e.Height() - 1
 }
 
-func (m CommandMode) OnKey(ev *termbox.Event) {
+func (m *CommandMode) OnKey(ev *termbox.Event) {
 	switch ev.Key {
 	case termbox.KeyEsc, termbox.KeyCtrlC:
-		m.editor.SetMode(m.mode)
+		m.Reset()
 	case termbox.KeyBackspace, termbox.KeyBackspace2:
 		l := m.buffer.Len()
 		if l > 0 {

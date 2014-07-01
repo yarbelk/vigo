@@ -7,28 +7,28 @@ import (
 	"github.com/nsf/termbox-go"
 )
 
-type normalMode struct {
+type NormalMode struct {
 	editor  *editor.Editor
 	count   string
 	command editor.Command
 }
 
-func NewNormalMode(e *editor.Editor) *normalMode {
-	m := normalMode{editor: e}
+func NewNormalMode(e *editor.Editor) *NormalMode {
+	m := NormalMode{editor: e}
 	m.editor.SetStatus("Normal")
 	return &m
 }
 
-func (m *normalMode) Enter(e *editor.Editor) {
+func (m *NormalMode) Enter(e *editor.Editor) {
 	e.ActiveView().Buffer().FinalizeActionGroup()
 }
 
-func (m *normalMode) Reset() {
+func (m *NormalMode) Reset() {
 	m.count = ""
 	m.command = nil
 }
 
-func (m *normalMode) OnKey(ev *termbox.Event) {
+func (m *NormalMode) OnKey(ev *termbox.Event) {
 	// Most of the key bindings are derived from those at
 	// http://elvis.the-little-red-haired-girl.org/elvisman/elvisvi.html#index
 
@@ -235,7 +235,7 @@ func (m *normalMode) OnKey(ev *termbox.Event) {
 	case 'v':
 		g.SetMode(NewVisualMode(g, false))
 	case 'V':
-		g.SetMode(NewVisualMode(g, true))
+		g.SetMode(NewVisualMode(g, false))
 	case ':':
 		// TODO use count to set range for command mode
 		g.SetMode(NewCommandMode(g, m))
@@ -247,5 +247,5 @@ func (m *normalMode) OnKey(ev *termbox.Event) {
   m.Reset()
 }
 
-func (m *normalMode) Exit() {
+func (m *NormalMode) Exit() {
 }

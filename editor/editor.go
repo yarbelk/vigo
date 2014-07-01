@@ -18,6 +18,7 @@ type Mode interface {
 	Enter(e *Editor)
 	OnKey(ev *termbox.Event)
 	Exit()
+	Reset()
 }
 
 // this is a structure which represents a key press, used for keyboard macros
@@ -50,12 +51,6 @@ var ErrQuit = errors.New("quit")
 type Command interface {
 	Apply(*Editor)
 }
-
-type EditorMode interface {
-	Reset()
-	OnKey(*termbox.Event)
-}
-
 
 type Editor struct {
 	uiBuf       tulib.Buffer
