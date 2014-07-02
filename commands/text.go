@@ -13,6 +13,12 @@ func (r InsertRune) Apply(e *editor.Editor) {
 	view.Buffer().InsertRune(view.Cursor(), r.Rune)
 }
 
+type InsertTab struct {}
+
+func (r InsertTab) Apply(e *editor.Editor) {
+	InsertRune{'\t'}.Apply(e)
+}
+
 type DeleteRune struct{}
 
 func (_ DeleteRune) Apply(e *editor.Editor) {

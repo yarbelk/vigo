@@ -51,6 +51,8 @@ func (m *InsertMode) OnKey(ev *termbox.Event) {
 		g.Commands <- cmd.InsertRune{'\r'}
 	case termbox.KeyCtrlJ:
 		g.Commands <- cmd.InsertRune{'\n'}
+	case termbox.KeyTab:
+		g.Commands <- cmd.InsertTab{}
 	default:
 		if ev.Ch != 0 {
 			g.Commands <- cmd.InsertRune{ev.Ch}
