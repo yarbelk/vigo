@@ -1,3 +1,8 @@
+// mode contains all the defintions of the various different modes.
+// NormalMode, CommandMode, InsertMode, SearchMode, VisualMode,
+// TextObjectMode and WindowMode.
+//
+// These modes should implement the editor.Mode interface
 package mode
 
 import (
@@ -7,6 +12,9 @@ import (
 	"github.com/nsf/termbox-go"
 )
 
+// NormalMode contains count as a string because it has to construct
+// the count character by character - waiting for the first non-numeric
+// rune before converting it into a number.
 type NormalMode struct {
 	editor  *editor.Editor
 	count   string

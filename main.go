@@ -1,3 +1,4 @@
+// vigo: implementation of VI in go
 package main
 
 import (
