@@ -28,6 +28,20 @@ $ git push fork
 $ git pull origin master
 ```
 
+### References
+
+A good reference for how VI behaves is [elvis](http://elvis.the-little-red-haired-girl.org/elvisdoc/index.html), read it if you have questions on how something should behave.
+
+### What to contribute?
+
+#### Docs
+
+These are still lacking - and are an easy place for you to jump in and contribute.  As a starting point [Godoc](http://blog.golang.org/godoc-documenting-go-code).
+
+#### Tests
+
+Flow to be figured out
+
 ## Building
 
 In the project directory, you can build ViGo by running `go build`. This will produce a `vigo` binary which you can run with `./vigo`.
