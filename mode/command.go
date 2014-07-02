@@ -46,6 +46,8 @@ func (m *CommandMode) OnKey(ev *termbox.Event) {
 		l := m.buffer.Len()
 		if l > 0 {
 			m.buffer.Truncate(l - 1)
+		} else if l == 0 {
+			m.Reset()
 		}
 	case termbox.KeyEnter:
 		c := m.buffer.String()
